@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-2ns(12mi_0-i^lq8z9&*$u90lqt9#x6k*z(*o-kl*izfq7yl)y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["https://web-production-e0a6.up.railway.app", '*']
 
 CSRF_TRUSTED_ORIGINS = ['https://web-production-e0a6.up.railway.app/']
 
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     # 'tracking.middleware.VisitorTrackingMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
