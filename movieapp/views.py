@@ -13,6 +13,7 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 import requests
@@ -47,6 +48,7 @@ def home(request):
     }
     return render(request, 'movieapp/index.html', context)
 
+@csrf_exempt
 def searchresult(request):
 
     if request.method == 'POST':
@@ -64,6 +66,7 @@ def searchresult(request):
         return render(request, 'movieapp/search-result.html', context)
     return render(request, 'movieapp/search-result.html')
 
+@csrf_exempt
 def detail(request, name):
     if request.method == 'POST':
         if request.user.is_authenticated:
@@ -229,6 +232,7 @@ def catalog_grid(request):
     }
     return render(request, 'movieapp/catalog1.html', context)
 
+@csrf_exempt
 def catalog_list(request):
     get_movies = movie.objects.all().order_by('-date_added')
     cats = Category.objects.all()
@@ -313,6 +317,7 @@ def catalog_list(request):
     }
     return render(request, 'movieapp/catalog2.html', context)
 
+@csrf_exempt
 def Series(request):
     get_movies = series.objects.filter(cat='series').order_by('-series_air_date')
     cats = Category.objects.all()
@@ -398,7 +403,7 @@ def Series(request):
     }
     return render(request, 'movieapp/series.html', context)
 
-
+@csrf_exempt
 def Anime(request):
     get_movies = series.objects.filter(cat='anime').order_by('-series_air_date')
     cats = Category.objects.all()
@@ -495,6 +500,7 @@ def about(request):
     return render(request, 'movieapp/about.html', {})
 
 @login_required
+@csrf_exempt
 def profile(request):
     my_user = User.objects.get(username=request.user)
     all_movies = movie.objects.all()
@@ -581,6 +587,7 @@ def profile(request):
     }
     return render(request, 'movieapp/profile.html', context)
 
+@csrf_exempt
 def reset_password(request):
     myuser = User.objects.get(username=request.user)
     if request.method == 'POST':
@@ -600,6 +607,7 @@ def reset_password(request):
             messages.error(request, 'You entered a wrong password')
             return redirect('profile')
 
+@csrf_exempt
 def signin(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -621,6 +629,7 @@ def signin(request):
     
     return render(request, 'movieapp/signin.html', {})
 
+@csrf_exempt
 def signup(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -669,6 +678,7 @@ def LogoutView(request):
     logout(request)
     return redirect('login')
 
+@csrf_exempt
 def forgot_password(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -706,6 +716,7 @@ def password_reset_sent(request):
         return redirect('home')
     return render(request, 'movieapp/password-reset-sent.html', {})
 
+@csrf_exempt
 def PasswordResedtView(request, name):
     if request.user.is_authenticated:
         return redirect('home')
@@ -733,6 +744,7 @@ def privacy(request):
    
     return render(request, 'movieapp/privacy.html',{})
 
+@csrf_exempt
 def contacts(request):
     if request.method == 'POST':
         name = request.POST['name']
@@ -824,6 +836,7 @@ def series_detail(request, name):
         return render(request, 'movieapp/details2.html', context)
     
 
+@csrf_exempt
 def series_detail_epi(request, name, seasons ,epi):
     get_series = series.objects.get(name=name)
     get_season = season.objects.get(season_num='1', series_name=get_series)
