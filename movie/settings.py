@@ -31,7 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["https://web-production-e0a6.up.railway.app", '*']
 
-CSRF_TRUSTED_ORIGINS = ['https://web-production-e0a6.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://web-production-e0a6.up.railway.app/', "https://protontv.cc/"]
 
 # SECURE_SSL_REDIRECT = True
 # Application definition
