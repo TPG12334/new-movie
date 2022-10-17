@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'dashboard',
     'protontvapi',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
